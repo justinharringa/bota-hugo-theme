@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <header class="post-header">
+    <h1 class="post-title mt-3">Latest Posts</h1>
+  </header>
+    {{ $truncate := default true .Site.Params.truncate }}
+    {{ range first 5 .Data.Pages }}
+        {{ if $truncate }} <!-- TODO: Deduplicate this! -->
+            {{ .Render "summary" }}
+        {{ else }}
+            {{ .Render "content" }}
+        {{ end }}
+    {{ end }}
+    <p class="rss-subscribe">See all <a href="{{ .Site.BaseURL}}posts/">blog posts</a> or <a href="{{ .RSSLink }}">subscribe via RSS <i class="fa fa-rss"></i></a></p>
+{{ end }}

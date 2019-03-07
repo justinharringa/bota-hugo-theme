@@ -1,0 +1,9 @@
+{{ $dateFormat := default "Jan 2, 2006" (index .Site.Params "date_format") }}
+      <li>
+        <span class="post-meta">{{ if not .Date.IsZero }}{{ .Date.Format $dateFormat }}{{ end }}</span>
+
+        <h2>
+          <a class="post-link mt-3" href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+        </h2>
+	{{ .Content }}
+      </li>

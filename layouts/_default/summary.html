@@ -1,0 +1,14 @@
+{{ $dateFormat := default "Jan 2, 2006" (index .Site.Params "date_format") }}
+      <div class="card mb-3">
+	<div class="card-body">
+
+        <h5 class="card-title">
+          <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+        </h5>
+        <h6 class="card-subtitle text-muted">{{ if not .Date.IsZero }}{{ .Date.Format $dateFormat }}{{ end }}</h6>
+	<p class="card-text">{{ .Summary }}</p>
+        {{ if .Truncated }}
+                <a href="{{ .RelPermalink }}" class="card-link">Read more...</a>
+        {{ end }}
+	</div>
+      </div>

@@ -1,0 +1,11 @@
+{{ define "title" }}
+  <!-- This will override the default value set in baseof.html; i.e., "{{.Site.Title}}" in the original example-->
+  {{ .Title }} &ndash; {{ .Site.Title }}
+{{ end }}
+{{ define "main" }}
+{{ $dateFormat := default "Jan 2, 2006" (index .Site.Params "date_format") }}
+  <h1 class="mt-3">{{ .Title }}</h1>
+  <h5 class="text-muted">{{ if not .Date.IsZero }}{{ .Date.Format $dateFormat }}{{ end }}</h5>
+  {{ .Content }}
+  {{ template "_internal/disqus.html" . }}
+{{ end }}
