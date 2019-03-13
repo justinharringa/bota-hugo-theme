@@ -3,8 +3,9 @@
     <h1 class="post-title mt-3">Latest Posts</h1>
   </header>
     {{ $truncate := default true .Site.Params.truncate }}
-    {{ with ($.Site.GetPage "post") }}
-      {{ range .Pages }}
+    {{ $blogPostTaxonomy := default "post" .Site.Params.blogPostTaxonomy}}
+    {{ with ($.Site.GetPage $blogPostTaxonomy) }}
+      {{ range first 5 .Pages }}
         {{ if $truncate }} <!-- TODO: Deduplicate this! -->
             {{ .Render "summary" }}
         {{ else }}
