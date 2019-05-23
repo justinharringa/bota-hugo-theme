@@ -7,7 +7,7 @@
            </button>
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
-		    {{ $url := .URL | relLangURL }}
+		    {{ $url := .RelPermalink | relLangURL }}
 		    {{ range .Site.Menus.main }}
 		        {{ if eq $url (.URL | relLangURL) }}<li class="nav-item active">{{ else }}<li class="nav-item">{{ end }}
                             <a class="nav-link" href="{{ .URL | relLangURL }}">{{ .Name }}</a>

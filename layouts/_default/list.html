@@ -10,5 +10,5 @@
             {{ .Render "content" }}
         {{ end }}
     {{ end }}
-    <p class="rss-subscribe"><a href="{{ .RSSLink }}">Subscribe via RSS <i class="fa fa-rss"></i></a></p>
+    <p class="rss-subscribe"><a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}">Subscribe via RSS <i class="fa fa-rss"></i></a></p>
 {{ end }}
