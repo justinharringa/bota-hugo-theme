@@ -15,8 +15,13 @@
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
   <link rel="canonical" href="{{ .Permalink }}">
   {{ $siteTitle := .Site.Title }}
-  {{ with .OutputFormats.Get "RSS" }}
-  <link rel="alternate" type="application/rss+xml" title="{{ $siteTitle }}" href="{{ .RelPermalink }}">
+  {{ $ctx := . }}
+  {{ $blogPostTaxonomy := default "post" .Site.Params.blogPostTaxonomy }}
+  {{ if .IsHome }}
+    {{ $ctx = .Site.GetPage (printf "/%s" $blogPostTaxonomy) }}
+  {{ end }}
+  {{ with $ctx.OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ if $ctx.Title }}{{ $ctx.Title }} - {{ end }}{{ $siteTitle }}" href="{{ .RelPermalink }}">
   {{ end }}
   <!--TODO: Use internal template: https://gohugo.io/templates/internal/#use-the-google-analytics-template -->
     <script>
