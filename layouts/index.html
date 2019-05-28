@@ -13,5 +13,5 @@
         {{ end }}
       {{ end }}
     {{ end }}
-    <p class="rss-subscribe">See all <a href="{{ .Site.BaseURL }}{{ $blogPostTaxonomy }}/">blog posts</a> or <a href="{{ .Site.BaseURL }}{{ $blogPostTaxonomy }}/index.xml">subscribe via RSS <i class="fa fa-rss"></i></a></p>
+    <p class="rss-subscribe">See all <a href="{{ $blogPostTaxonomy | relLangURL }}/">blog posts</a> or <a href="{{ printf "%s/%s" $blogPostTaxonomy "index.xml" | relLangURL }}">subscribe via RSS <i class="fa fa-rss"></i></a></p>
 {{ end }}
