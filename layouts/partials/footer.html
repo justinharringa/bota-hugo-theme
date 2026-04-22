@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="container">
         <ul class="social-media-list">
-            {{ range $.Site.Data.social }}
+            {{ range hugo.Data.social }}
                 <li class="social-media-link">
 			{{ partial "icon-social.html" . }}
                 </li>
