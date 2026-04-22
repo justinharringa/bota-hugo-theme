@@ -8,7 +8,7 @@ description = "Minimal Bootstrap blog theme for Hugo with Disqus and social medi
 homepage = "https://harringa.com/"
 tags = ["bootstrap", "blog", "disqus", "social", "font awesome", "responsive"]
 features = ["bootstrap", "responsive", "disqus for blog posts", "social media icon / links in footer"]
-min_version = "0.41"
+min_version = "0.128.0"
 
 [author]
   name = "Justin Harringa"
