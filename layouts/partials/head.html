@@ -22,4 +22,5 @@
   {{ with $ctx.OutputFormats.Get "RSS" }}
   <link rel="alternate" type="application/rss+xml" title="{{ if $ctx.Title }}{{ $ctx.Title }} - {{ end }}{{ $siteTitle }}" href="{{ .RelPermalink }}">
   {{ end }}
+  {{ template "_internal/google_analytics.html" . }}
 </head>
