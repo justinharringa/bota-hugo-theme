@@ -10,6 +10,14 @@ taxonomies:
   category: categories
   tag: tags
 
+# Fake values — exampleSite exists only to exercise templates in CI, not
+# to ship analytics or real Disqus.
+services:
+  googleAnalytics:
+    ID: "G-TESTXXXXXX"
+
+disqusShortname: "bota-theme-example"
+
 params:
   author: Example Author
   SiteDescription: Example site used by CI to exercise the bota theme's templates.
@@ -20,6 +28,9 @@ menu:
   - name: Blog Posts
     url: /posts/
     weight: -100
+  - name: About
+    url: /about/
+    weight: -80
 
 markup:
   goldmark:
