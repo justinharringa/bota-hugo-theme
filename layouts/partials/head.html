@@ -5,7 +5,7 @@
   <title>{{ if and .Title (ne .Title .Site.Title) }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
   <!-- TODO: GET AN EXCERPT INSTEAD LIKE IN JEKYLL?? -->
   <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.SiteDescription }}{{ end }}">
-  <meta name="author" content="Justin Harringa"> <!-- TODO: Dynamic Author -->
+  {{ with (or .Params.author .Site.Params.author) }}<meta name="author" content="{{ . }}">{{ end }}
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
