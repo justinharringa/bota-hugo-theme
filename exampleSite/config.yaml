@@ -1,0 +1,27 @@
+baseURL: https://example.com
+languageCode: en-us
+title: Bota Theme Example
+theme: bota
+
+permalinks:
+  posts: posts/:year/:month/:title/
+
+taxonomies:
+  category: categories
+  tag: tags
+
+params:
+  author: Example Author
+  SiteDescription: Example site used by CI to exercise the bota theme's templates.
+  blogPostTaxonomy: posts
+
+menu:
+  main:
+  - name: Blog Posts
+    url: /posts/
+    weight: -100
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
