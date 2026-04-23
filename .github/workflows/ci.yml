@@ -19,6 +19,8 @@ jobs:
     env:
       # renovate: datasource=github-releases depName=gohugoio/hugo extractVersion=^v(?<version>.+)$
       HUGO_VERSION: 0.160.1
+      # renovate: datasource=github-releases depName=wjdp/htmltest extractVersion=^v(?<version>.+)$
+      HTMLTEST_VERSION: 0.17.0
     steps:
       - name: Checkout (into themes/bota so exampleSite can resolve the theme)
         uses: actions/checkout@v6
@@ -37,6 +39,21 @@ jobs:
       - name: Build exampleSite
         working-directory: themes/bota/exampleSite
         run: hugo --themesDir ../.. --destination ./public --printPathWarnings
+
+      - name: Install htmltest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "v${HTMLTEST_VERSION}" \
+            --repo wjdp/htmltest \
+            --pattern "htmltest_${HTMLTEST_VERSION}_linux_amd64.tar.gz" \
+            --dir "${RUNNER_TEMP}"
+          tar -xzf "${RUNNER_TEMP}/htmltest_${HTMLTEST_VERSION}_linux_amd64.tar.gz" -C "${RUNNER_TEMP}"
+          sudo install -m 0755 "${RUNNER_TEMP}/htmltest" /usr/local/bin/htmltest
+
+      - name: Validate HTML + check internal links
+        working-directory: themes/bota/exampleSite
+        run: htmltest --conf .htmltest.yml
 
       - name: Verify rendered output exercises core features
         working-directory: themes/bota/exampleSite/public
