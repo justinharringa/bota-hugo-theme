@@ -37,3 +37,38 @@ jobs:
       - name: Build exampleSite
         working-directory: themes/bota/exampleSite
         run: hugo --themesDir ../.. --destination ./public --printPathWarnings
+
+      - name: Verify rendered output exercises core features
+        working-directory: themes/bota/exampleSite/public
+        run: |
+          set -euxo pipefail
+
+          post=posts/2026/01/hello-world/index.html
+          post_no_author=posts/2026/02/a-post-with-no-author-front-matter/index.html
+
+          # Hugo's internal google_analytics template wired up via config
+          grep -q 'G-TESTXXXXXX' "$post"
+          grep -q 'googletagmanager' "$post"
+
+          # Hugo's internal disqus template wired up on posts
+          grep -q 'bota-theme-example' "$post"
+
+          # All three data/social/*.yaml entries render in the footer
+          grep -q 'fa-github'   index.html
+          grep -q 'fa-linkedin' index.html
+          grep -q 'fa-twitter'  index.html
+
+          # Dynamic author: per-post override
+          grep -q '<meta name="author" content="Post Author">' "$post"
+
+          # Dynamic author: site-param fallback when no front matter
+          grep -q '<meta name="author" content="Example Author">' "$post_no_author"
+
+          # _default/single.html exercised by a standalone page
+          grep -q '>About</h1>' about/index.html
+
+          # ReadingTime renders alongside date
+          grep -q 'min read' "$post"
+
+          # Home title collapses to site title only (no "Foo | Foo")
+          grep -q '<title>Bota Theme Example</title>' index.html

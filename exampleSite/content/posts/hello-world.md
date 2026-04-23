@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2026-01-01
-author: Example Author
+author: Post Author
 tags:
   - sample
 categories:
